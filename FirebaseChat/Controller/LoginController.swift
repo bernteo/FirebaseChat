@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
     
@@ -29,39 +30,40 @@ class LoginController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        //        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         
         return button
     }()
     
-    //    @objc func handleRegister() {
-    //
-    //        guard let name = nameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else {
-    //            print("Form is not valid")
-    //            return
-    //        }
-    //
-    //        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-    //            if error != nil {
-    //                print(error!)
-    //            }
-    //            else {
-    //                let ref = Database.database().reference().child("Users")
-    //                let values = ["Name": name, "Email": email]
-    //                ref.childByAutoId().setValue(values) {
-    //                    (err, ref) in
-    //                    if err != nil {
-    //                        print(err!)
-    //                    }
-    //                    else {
-    //                        print("New User Saved in DB")
-    //                    }
-    //                }
-    //
-    //            }
-    //        }
-    //
-    //    }
+        @objc func handleRegister() {
+    
+            guard let name = nameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else {
+                print("Form is not valid")
+                return
+            }
+    
+            Auth.auth().createUser(withEmail: email, password: password) {
+                (user, error) in
+                if error != nil {
+                    print(error!)
+                }
+                else {
+                    let ref = Database.database().reference().child("Users")
+                    let values = ["Name": name, "Email": email]
+                    ref.childByAutoId().setValue(values) {
+                        (err, ref) in
+                        if err != nil {
+                            print(err!)
+                        }
+                        else {
+                            print("New User Saved in DB")
+                        }
+                    }
+    
+                }
+            }
+    
+        }
     
     //nameTextField : UITextField!
     let nameTextField : UITextField = {
