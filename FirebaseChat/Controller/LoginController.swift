@@ -113,6 +113,19 @@ class LoginController: UIViewController {
         return iv
     }()
     
+    //SegmentedControl : UISegmentedControl!
+    let loginRegisterSegmentedControl : UISegmentedControl = {
+        let sc = UISegmentedControl(items: ["Login", "Register"])
+        sc.tintColor = UIColor.white
+        sc.selectedSegmentIndex = 1
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.addTarget(self, action: #selector(handleLoginRegisterChange), for: .valueChanged)
+        return sc
+    }()
+    
+    @objc func handleLoginRegisterChange() {
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,17 +137,25 @@ class LoginController: UIViewController {
         view.addSubview(profileImageView)
         view.addSubview(inputsContainerView)
         view.addSubview(loginRegisterButton)
+        view.addSubview(loginRegisterSegmentedControl)
         
         setupProfileImageView()
         setupInputsContainerView()
         setupLoginRegisterButton()
+        setupLoginRegisterSegmentedControl()
         
-        
+    }
+    
+    func setupLoginRegisterSegmentedControl() {
+        loginRegisterSegmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loginRegisterSegmentedControl.bottomAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -12).isActive = true
+        loginRegisterSegmentedControl.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
+        loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     func setupProfileImageView() {
         profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        profileImageView.bottomAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -24).isActive = true
+        profileImageView.bottomAnchor.constraint(equalTo: loginRegisterSegmentedControl.topAnchor, constant: -24).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
     }
