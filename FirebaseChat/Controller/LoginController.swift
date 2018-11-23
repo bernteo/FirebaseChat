@@ -124,7 +124,8 @@ class LoginController: UIViewController {
     }()
     
     @objc func handleLoginRegisterChange() {
-        
+        let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
+        loginRegisterButton.setTitle(title, for: .normal)
     }
     
     override func viewDidLoad() {
@@ -150,7 +151,7 @@ class LoginController: UIViewController {
         loginRegisterSegmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loginRegisterSegmentedControl.bottomAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -12).isActive = true
         loginRegisterSegmentedControl.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     func setupProfileImageView() {
