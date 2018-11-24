@@ -22,7 +22,7 @@ class LoginController: UIViewController {
     }()
     
     //registerButton : UIButton!
-    let registerButton : UIButton = {
+    let loginRegisterButton : UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
         button.setTitle("Register", for: .normal)
@@ -38,7 +38,7 @@ class LoginController: UIViewController {
     @objc func handleRegister() {
         
         guard let name = nameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else {
-            print("Form is not valid")
+            print("Form not valid")
             return
         }
         
@@ -112,25 +112,49 @@ class LoginController: UIViewController {
         return pi
     }()
     
+    //segmentedControl : UISegmentedControl!
+    let loginRegisterSegmentedControl : UISegmentedControl = {
+        let sc = UISegmentedControl(items: ["Login", "Register"])
+        sc.tintColor = UIColor.white
+        sc.selectedSegmentIndex = 1
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.addTarget(self, action: #selector(handleLoginRegisterChange), for: .valueChanged)
+        return sc
+    }()
+    
+    @objc func handleLoginRegisterChange() {
+        let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
+        loginRegisterButton.setTitle(title, for: .normal)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
         
-        view.addSubview(profileImage)
         view.addSubview(inputsCV)
-        view.addSubview(registerButton)
+        view.addSubview(profileImage)
+        view.addSubview(loginRegisterSegmentedControl)
+        view.addSubview(loginRegisterButton)
         
         setupProfileImage()
         setupInputsCV()
         setupRegisterButton()
+        setupLoginRegisterSC()
     }
     
     func setupProfileImage() {
         profileImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        profileImage.bottomAnchor.constraint(equalTo: inputsCV.topAnchor, constant: -12).isActive = true
+        profileImage.bottomAnchor.constraint(equalTo: loginRegisterSegmentedControl.topAnchor, constant: -12).isActive = true
         profileImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
         profileImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    }
+    
+    func setupLoginRegisterSC() {
+        loginRegisterSegmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loginRegisterSegmentedControl.bottomAnchor.constraint(equalTo: inputsCV.topAnchor, constant: -12).isActive = true
+        loginRegisterSegmentedControl.widthAnchor.constraint(equalTo: inputsCV.widthAnchor).isActive = true
+        loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
     
     func setupInputsCV() {
@@ -173,10 +197,10 @@ class LoginController: UIViewController {
     }
     
     func setupRegisterButton() {
-        registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        registerButton.topAnchor.constraint(equalTo: inputsCV.bottomAnchor, constant: 12).isActive = true
-        registerButton.widthAnchor.constraint(equalTo: inputsCV.widthAnchor).isActive = true
-        registerButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        loginRegisterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loginRegisterButton.topAnchor.constraint(equalTo: inputsCV.bottomAnchor, constant: 12).isActive = true
+        loginRegisterButton.widthAnchor.constraint(equalTo: inputsCV.widthAnchor).isActive = true
+        loginRegisterButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
