@@ -31,6 +31,45 @@ class LoginController: UIViewController {
         return button
     }()
     
+    //textField : UITextField!
+    let nameTextField : UITextField = {
+       let tf = UITextField()
+        tf.placeholder = "Name"
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        return tf
+    }()
+    
+    let nameSeparator : UIView = {
+        let ns = UIView()
+        ns.backgroundColor = UIColor(r: 220, g: 220, b: 220)
+        ns.translatesAutoresizingMaskIntoConstraints = false
+        return ns
+    }()
+    
+    //textField : UITextField!
+    let emailTextField : UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Email"
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        return tf
+    }()
+    
+    let emailSeparator : UIView = {
+        let ns = UIView()
+        ns.backgroundColor = UIColor(r: 220, g: 220, b: 220)
+        ns.translatesAutoresizingMaskIntoConstraints = false
+        return ns
+    }()
+    
+    //textField : UITextField!
+    let passwordTextField : UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Password"
+        tf.isSecureTextEntry = true
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        return tf
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,6 +87,38 @@ class LoginController: UIViewController {
         inputsCV.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         inputsCV.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         inputsCV.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        view.addSubview(nameTextField)
+        view.addSubview(nameSeparator)
+        view.addSubview(emailTextField)
+        view.addSubview(emailSeparator)
+        view.addSubview(passwordTextField)
+        
+        nameTextField.leftAnchor.constraint(equalTo: inputsCV.leftAnchor, constant: 12).isActive = true
+        nameTextField.topAnchor.constraint(equalTo: inputsCV.topAnchor).isActive = true
+        nameTextField.widthAnchor.constraint(equalTo: inputsCV.widthAnchor).isActive = true
+        nameTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: 1/3).isActive = true
+        
+        nameSeparator.leftAnchor.constraint(equalTo: inputsCV.leftAnchor).isActive = true
+        nameSeparator.topAnchor.constraint(equalTo: nameTextField.bottomAnchor).isActive = true
+        nameSeparator.widthAnchor.constraint(equalTo: inputsCV.widthAnchor).isActive = true
+        nameSeparator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        emailTextField.leftAnchor.constraint(equalTo: inputsCV.leftAnchor, constant: 12).isActive = true
+        emailTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor).isActive = true
+        emailTextField.widthAnchor.constraint(equalTo: inputsCV.widthAnchor).isActive = true
+        emailTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: 1/3).isActive = true
+        
+        emailSeparator.leftAnchor.constraint(equalTo: inputsCV.leftAnchor).isActive = true
+        emailSeparator.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
+        emailSeparator.widthAnchor.constraint(equalTo: inputsCV.widthAnchor).isActive = true
+        emailSeparator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        passwordTextField.leftAnchor.constraint(equalTo: inputsCV.leftAnchor, constant: 12).isActive = true
+        passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
+        passwordTextField.widthAnchor.constraint(equalTo: inputsCV.widthAnchor).isActive = true
+        passwordTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: 1/3).isActive = true
+        
     }
     
     func setupRegisterButton() {
