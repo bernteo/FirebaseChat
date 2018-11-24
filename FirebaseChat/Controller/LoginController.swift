@@ -70,16 +70,33 @@ class LoginController: UIViewController {
         return tf
     }()
     
+    //profileImage : UIImageView!
+    let profileImage : UIImageView = {
+        let pi = UIImageView()
+        pi.image = UIImage(named: "profile icon")
+        pi.translatesAutoresizingMaskIntoConstraints = false
+        return pi
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
         
+        view.addSubview(profileImage)
         view.addSubview(inputsCV)
         view.addSubview(registerButton)
         
+        setupProfileImage()
         setupInputsCV()
         setupRegisterButton()
+    }
+    
+    func setupProfileImage() {
+        profileImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        profileImage.bottomAnchor.constraint(equalTo: inputsCV.topAnchor, constant: -12).isActive = true
+        profileImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        profileImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
     func setupInputsCV() {
