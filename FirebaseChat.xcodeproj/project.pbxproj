@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A13927B321A8EE4F00970751 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13927B221A8EE4F00970751 /* LoginController.swift */; };
 		A1DB5DFF21A83B4F000B4319 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DB5DFE21A83B4F000B4319 /* AppDelegate.swift */; };
 		A1DB5E0121A83B4F000B4319 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DB5E0021A83B4F000B4319 /* ViewController.swift */; };
 		A1DB5E0621A83B50000B4319 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1DB5E0521A83B50000B4319 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A13927B221A8EE4F00970751 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		A1DB5DFB21A83B4F000B4319 /* FirebaseChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1DB5DFE21A83B4F000B4319 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1DB5E0021A83B4F000B4319 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,6 +35,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A13927B121A8EE1100970751 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A1DB5E0021A83B4F000B4319 /* ViewController.swift */,
+				A13927B221A8EE4F00970751 /* LoginController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		A1DB5DF221A83B4F000B4319 = {
 			isa = PBXGroup;
 			children = (
@@ -52,8 +63,8 @@
 		A1DB5DFD21A83B4F000B4319 /* FirebaseChat */ = {
 			isa = PBXGroup;
 			children = (
+				A13927B121A8EE1100970751 /* Controller */,
 				A1DB5DFE21A83B4F000B4319 /* AppDelegate.swift */,
-				A1DB5E0021A83B4F000B4319 /* ViewController.swift */,
 				A1DB5E0521A83B50000B4319 /* Assets.xcassets */,
 				A1DB5E0721A83B50000B4319 /* LaunchScreen.storyboard */,
 				A1DB5E0A21A83B50000B4319 /* Info.plist */,
@@ -132,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1DB5E0121A83B4F000B4319 /* ViewController.swift in Sources */,
+				A13927B321A8EE4F00970751 /* LoginController.swift in Sources */,
 				A1DB5DFF21A83B4F000B4319 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
