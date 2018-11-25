@@ -128,6 +128,19 @@ class LoginController: UIViewController {
         loginRegisterButton.setTitle(title, for: .normal)
         
         inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
+        
+        nameTextFieldHeightAnchor?.isActive = false
+        nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
+        nameTextFieldHeightAnchor?.isActive = true
+        
+        emailTFHeightAnchor?.isActive = false
+        emailTFHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        emailTFHeightAnchor?.isActive = true
+        
+        passwordTFHeightAnchor?.isActive = false
+        passwordTFHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        passwordTFHeightAnchor?.isActive = true
+
     }
     
     override func viewDidLoad() {
@@ -164,6 +177,9 @@ class LoginController: UIViewController {
     }
     
     var inputsContainerViewHeightAnchor : NSLayoutConstraint?
+    var nameTextFieldHeightAnchor : NSLayoutConstraint?
+    var emailTFHeightAnchor : NSLayoutConstraint?
+    var passwordTFHeightAnchor : NSLayoutConstraint?
     
     func setupInputsContainerView() {
         
@@ -184,7 +200,9 @@ class LoginController: UIViewController {
         nameTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
         nameTextField.topAnchor.constraint(equalTo: inputsContainerView.topAnchor).isActive = true
         nameTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        
+        nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3)
+        nameTextFieldHeightAnchor?.isActive = true
         
         nameSeparator.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor).isActive = true
         nameSeparator.topAnchor.constraint(equalTo: nameTextField.bottomAnchor).isActive = true
@@ -194,7 +212,9 @@ class LoginController: UIViewController {
         emailTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
         emailTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor).isActive = true
         emailTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        
+        emailTFHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3)
+        emailTFHeightAnchor?.isActive = true
         
         emailSeparator.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor).isActive = true
         emailSeparator.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
@@ -204,7 +224,9 @@ class LoginController: UIViewController {
         passwordTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
         passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
         passwordTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        
+        passwordTFHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3)
+        passwordTFHeightAnchor?.isActive = true
         
     }
     
