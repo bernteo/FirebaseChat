@@ -30,40 +30,71 @@ class LoginController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
         
         return button
     }()
     
-        @objc func handleRegister() {
-    
-            guard let name = nameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else {
-                print("Form is not valid")
-                return
-            }
-    
-            Auth.auth().createUser(withEmail: email, password: password) {
-                (user, error) in
-                if error != nil {
-                    print(error!)
-                }
-                else {
-                    let ref = Database.database().reference().child("Users")
-                    let values = ["Name": name, "Email": email]
-                    ref.childByAutoId().setValue(values) {
-                        (err, ref) in
-                        if err != nil {
-                            print(err!)
-                        }
-                        else {
-                            print("New User Saved in DB")
-                        }
-                    }
-    
-                }
-            }
-    
+    @objc func handleLoginRegister() {
+        
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
+            handleLogin()
         }
+        handleRegister()
+        
+    }
+    func handleLogin() {
+        guard let email = emailTextField.text, let password = passwordTextField.text else {
+            print("Form is not valid")
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: email, password: password) {
+            (user, error) in
+            if error != nil {
+                print(error!)
+            }
+            else {
+                print("Signed In")
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func handleRegister() {
+    
+        guard let name = nameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else {
+            print("Form is not valid")
+            return
+        }
+    
+        Auth.auth().createUser(withEmail: email, password: password) {
+            (user, error) in
+            if error != nil {
+                print(error!)
+            }
+            else {
+                guard let uid = user?.user.uid else {
+                    return
+                }
+                
+                let ref = Database.database().reference().child("Users").child(uid)
+                let values = ["Name": name, "Email": email]
+                ref.updateChildValues(values, withCompletionBlock: {
+                    (err, ref) in
+                    if err != nil {
+                        print(err!)
+                    }
+                    else {
+                        print("New User Saved in DB")
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                })
+    
+            }
+        }
+    
+    }
     
     //nameTextField : UITextField!
     let nameTextField : UITextField = {
