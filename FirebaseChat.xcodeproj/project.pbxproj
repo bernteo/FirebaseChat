@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A14972CC21B27A7D00742DF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A14972CB21B27A7D00742DF4 /* Assets.xcassets */; };
+		A14972CE21B28AEF00742DF4 /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14972CD21B28AEF00742DF4 /* LoginController+handlers.swift */; };
+		A1AA0B5E21B224BC00466C27 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA0B5D21B224BC00466C27 /* User.swift */; };
+		A1D28D8621B037CD004385D0 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D28D8521B037CD004385D0 /* NewMessageController.swift */; };
 		A1DB5DFF21A83B4F000B4319 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DB5DFE21A83B4F000B4319 /* AppDelegate.swift */; };
-		A1DB5E0121A83B4F000B4319 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DB5E0021A83B4F000B4319 /* ViewController.swift */; };
-		A1DB5E0621A83B50000B4319 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1DB5E0521A83B50000B4319 /* Assets.xcassets */; };
+		A1DB5E0121A83B4F000B4319 /* MesssageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DB5E0021A83B4F000B4319 /* MesssageController.swift */; };
 		A1DB5E0921A83B50000B4319 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1DB5E0721A83B50000B4319 /* LaunchScreen.storyboard */; };
 		A1DB5E1221A83D3B000B4319 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DB5E1121A83D3B000B4319 /* LoginController.swift */; };
 		A1DB5E1721A846F9000B4319 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1DB5E1621A846F9000B4319 /* GoogleService-Info.plist */; };
@@ -19,10 +22,13 @@
 /* Begin PBXFileReference section */
 		07D16B0FA4427ECABC2C99E6 /* Pods_FirebaseChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		653F0EA74C5A3AB23ED1CA1F /* Pods-FirebaseChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseChat/Pods-FirebaseChat.debug.xcconfig"; sourceTree = "<group>"; };
+		A14972CB21B27A7D00742DF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A14972CD21B28AEF00742DF4 /* LoginController+handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
+		A1AA0B5D21B224BC00466C27 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A1D28D8521B037CD004385D0 /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		A1DB5DFB21A83B4F000B4319 /* FirebaseChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1DB5DFE21A83B4F000B4319 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A1DB5E0021A83B4F000B4319 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A1DB5E0521A83B50000B4319 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1DB5E0021A83B4F000B4319 /* MesssageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesssageController.swift; sourceTree = "<group>"; };
 		A1DB5E0821A83B50000B4319 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1DB5E0A21A83B50000B4319 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1DB5E1121A83D3B000B4319 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -42,6 +48,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A1AA0B5C21B224A800466C27 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A1AA0B5D21B224BC00466C27 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A1DB5DF221A83B4F000B4319 = {
 			isa = PBXGroup;
 			children = (
@@ -63,12 +77,13 @@
 		A1DB5DFD21A83B4F000B4319 /* FirebaseChat */ = {
 			isa = PBXGroup;
 			children = (
+				A1AA0B5C21B224A800466C27 /* Model */,
 				A1DB5E1021A83CE3000B4319 /* Controller */,
 				A1DB5DFE21A83B4F000B4319 /* AppDelegate.swift */,
-				A1DB5E0521A83B50000B4319 /* Assets.xcassets */,
 				A1DB5E0721A83B50000B4319 /* LaunchScreen.storyboard */,
 				A1DB5E0A21A83B50000B4319 /* Info.plist */,
 				A1DB5E1621A846F9000B4319 /* GoogleService-Info.plist */,
+				A14972CB21B27A7D00742DF4 /* Assets.xcassets */,
 			);
 			path = FirebaseChat;
 			sourceTree = "<group>";
@@ -76,8 +91,10 @@
 		A1DB5E1021A83CE3000B4319 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A1DB5E0021A83B4F000B4319 /* ViewController.swift */,
+				A1DB5E0021A83B4F000B4319 /* MesssageController.swift */,
 				A1DB5E1121A83D3B000B4319 /* LoginController.swift */,
+				A1D28D8521B037CD004385D0 /* NewMessageController.swift */,
+				A14972CD21B28AEF00742DF4 /* LoginController+handlers.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -160,7 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1DB5E0921A83B50000B4319 /* LaunchScreen.storyboard in Resources */,
-				A1DB5E0621A83B50000B4319 /* Assets.xcassets in Resources */,
+				A14972CC21B27A7D00742DF4 /* Assets.xcassets in Resources */,
 				A1DB5E1721A846F9000B4319 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +219,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -210,6 +228,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -223,8 +242,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1DB5E0121A83B4F000B4319 /* ViewController.swift in Sources */,
+				A1D28D8621B037CD004385D0 /* NewMessageController.swift in Sources */,
+				A1DB5E0121A83B4F000B4319 /* MesssageController.swift in Sources */,
+				A14972CE21B28AEF00742DF4 /* LoginController+handlers.swift in Sources */,
 				A1DB5E1221A83D3B000B4319 /* LoginController.swift in Sources */,
+				A1AA0B5E21B224BC00466C27 /* User.swift in Sources */,
 				A1DB5DFF21A83B4F000B4319 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,6 +389,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L6AJRVHGUB;
 				INFOPLIST_FILE = FirebaseChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -386,6 +409,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L6AJRVHGUB;
 				INFOPLIST_FILE = FirebaseChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
