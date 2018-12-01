@@ -39,22 +39,40 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                     print(error!)
                 }
                 else {
-                    print(metadata!)
+
+                    storageRef.downloadURL(completion: { (url, error) in
+                        if error != nil {
+                            print(error!)
+                        }
+                        else {
+                            let downloadUrl = url?.absoluteString
+                            
+                            let values = ["Name": name, "Email": email, "ProfileImageUrl": downloadUrl]
+
+                            self.registerUserIntoDatabaseWithUID(uid: uid, values: values as [String: AnyObject])
+
+                        }
+                    })
                 }
             })
             }
-            let ref = Database.database().reference().child("Users").child(uid)
-            let values = ["Name": name, "Email": email]
-            ref.updateChildValues(values, withCompletionBlock: { (err, ref) in
-                
-                if let err = err {
-                    print(err)
-                    return
-                }
-                
-                self.dismiss(animated: true, completion: nil)
-            })
+    
         })
+    }
+    
+    func registerUserIntoDatabaseWithUID(uid: String, values: [String: AnyObject]) {
+        let ref = Database.database().reference().child("Users").child(uid)
+//        let values = ["Name": name, "Email": email]
+        ref.updateChildValues(values, withCompletionBlock: { (err, ref) in
+            
+            if let err = err {
+                print(err)
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        })
+        
     }
     
 
