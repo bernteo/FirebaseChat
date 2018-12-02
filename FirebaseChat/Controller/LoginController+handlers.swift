@@ -49,7 +49,7 @@ extension LoginController : UIImagePickerControllerDelegate, UINavigationControl
                                     let values = ["Name": name, "Email": email, "ProfileImageUrl": downloadUrl]
                                     
                                     self.registerUserIntoDatabase(uid: uid, values: values as [String: AnyObject])
-
+                                    
                                 }
                             })
                         }
@@ -61,7 +61,7 @@ extension LoginController : UIImagePickerControllerDelegate, UINavigationControl
     //refactor out as func
     func registerUserIntoDatabase(uid: String, values: [String: AnyObject]) {
         let ref = Database.database().reference().child("Users").child(uid)
-//        let values = ["Name": name, "Email": email]
+        //        let values = ["Name": name, "Email": email]
         ref.updateChildValues(values, withCompletionBlock: { (error, ref) in
             if error != nil {
                 print(error!)
@@ -93,7 +93,7 @@ extension LoginController : UIImagePickerControllerDelegate, UINavigationControl
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
             selectedImageFromPicker = editedImage
         }
-        
+            
         else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             selectedImageFromPicker = originalImage
         }
