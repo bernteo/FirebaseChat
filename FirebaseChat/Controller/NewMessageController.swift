@@ -58,25 +58,30 @@ class NewMessageController: UITableViewController {
         return users.count
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 56
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // let use a hack for now, we actually need to dequeue our cells for memory efficiency
         //        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        //** as! to unwrapped UserCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! UserCell
         
         let user = users[indexPath.row]
         cell.textLabel?.text = user.name
         cell.detailTextLabel?.text = user.email
         
-        cell.imageView?.image = UIImage(named: "nedstark")
-        cell.imageView?.contentMode = .scaleAspectFill
+//        cell.imageView?.image = UIImage(named: "nedstark")
+//        cell.imageView?.contentMode = .scaleAspectFill
         
         if let profileImageUrl = user.profileImageUrl {
             //** URL instead of NSURL
             let url = URL(string: profileImageUrl)
             //** URL shared datTask instead of NSURLSession sharedSession dataTaskWithURL
-            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+            URLSession.shared.dataTask(with: url!, completionHandler: {
+                (data, response, error) in
             
                 if error != nil {
                     print(error!)
@@ -84,7 +89,8 @@ class NewMessageController: UITableViewController {
                 else {
                     
                     DispatchQueue.main.async(execute: {
-                        cell.imageView?.image = UIImage(data: data!)
+//                        cell.imageView?.image = UIImage(data: data!)
+                        cell.profileImageView.image = UIImage(data: data!)
                     })
                 }
             }).resume()
@@ -95,8 +101,32 @@ class NewMessageController: UITableViewController {
 
 class UserCell: UITableViewCell {
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        textLabel?.frame = CGRect(x: 56, y: textLabel!.frame.origin.y, width: textLabel!.frame.width, height: textLabel!.frame.height)
+        detailTextLabel?.frame = CGRect(x: 56, y: detailTextLabel!.frame.origin.y, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
+
+    }
+    
+    let profileImageView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "nedstark")
+        imageView.layer.cornerRadius = 20
+        imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        
+        addSubview(profileImageView)
+        
+        profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+        profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -59,7 +59,7 @@ extension LoginController : UIImagePickerControllerDelegate, UINavigationControl
         }
     }
     //refactor out as func
-    func registerUserIntoDatabase(uid: String, values: [String: AnyObject]) {
+    private func registerUserIntoDatabase(uid: String, values: [String: AnyObject]) {
         let ref = Database.database().reference().child("Users").child(uid)
         //        let values = ["Name": name, "Email": email]
         ref.updateChildValues(values, withCompletionBlock: { (error, ref) in
