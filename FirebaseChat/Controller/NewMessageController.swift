@@ -13,7 +13,7 @@ class NewMessageController: UITableViewController {
     
     let cellId = "cellId"
     
-    var users : [User] = [User]()
+    var users = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +34,15 @@ class NewMessageController: UITableViewController {
                 
                 user.name = dictionary["Name"] as? String
                 user.email = dictionary["Email"] as? String
+                //** need to insert url to user in order to display in tableView below
+                user.profileImageUrl = dictionary["ProfileImageUrl"] as? String
                 //if you use this setter, your app will crash if your class properties don't exactly match up with the firebase dictionary keys
                 self.users.append(user)
                 
                 //this will crash because of background thread, so lets use dispatch_async to fix
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                DispatchQueue.main.async(execute: {
+                     self.tableView.reloadData()
+                })
                 
                 //                user.name = dictionary["name"]
             }
@@ -67,9 +69,28 @@ class NewMessageController: UITableViewController {
         cell.textLabel?.text = user.name
         cell.detailTextLabel?.text = user.email
         
+        cell.imageView?.image = UIImage(named: "nedstark")
+        cell.imageView?.contentMode = .scaleAspectFill
+        
+        if let profileImageUrl = user.profileImageUrl {
+            //** URL instead of NSURL
+            let url = URL(string: profileImageUrl)
+            //** URL shared datTask instead of NSURLSession sharedSession dataTaskWithURL
+            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+            
+                if error != nil {
+                    print(error!)
+                }
+                else {
+                    
+                    DispatchQueue.main.async(execute: {
+                        cell.imageView?.image = UIImage(data: data!)
+                    })
+                }
+            }).resume()
+        }
         return cell
     }
-    
 }
 
 class UserCell: UITableViewCell {
