@@ -30,12 +30,39 @@ class LoginController : UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
         
         return button
     }()
     
-    @objc func handleRegister() {
+    @objc func handleLoginRegister() {
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
+           handleLogin()
+        }
+        else {
+            handleRegister()
+        }
+    }
+    
+    func handleLogin() {
+        
+        guard let email = emailTextField.text, let password = passwordTextField.text else {
+            print("Form not valid")
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if error != nil {
+                print(error!)
+            }
+            else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+        
+    }
+    
+    func handleRegister() {
         
         guard let name = nameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else {
             print("Form not valid")
@@ -49,8 +76,12 @@ class LoginController : UIViewController {
                 print(error!)
             }
             else {
+                
+                guard let uid = user?.user.uid else {
+                    return
+                }
          
-                let ref = Database.database().reference().child("Users")
+                let ref = Database.database().reference().child("Users").child(uid)
                 let values = ["Name": name, "Email": email]
                 ref.updateChildValues(values, withCompletionBlock: {
                     (err, ref) in
@@ -58,7 +89,7 @@ class LoginController : UIViewController {
                         print(err!)
                     }
                     else {
-                        print("Saved User in DB")
+                        self.dismiss(animated: true, completion: nil)
                     }
                 })
             }
