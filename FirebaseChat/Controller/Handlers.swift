@@ -12,7 +12,7 @@ import Firebase
 extension LoginController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func handleRegister() {
-        
+        //UPLOAD
         guard let name = nameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else {
             print("Form not valid")
             return
@@ -29,7 +29,7 @@ extension LoginController : UIImagePickerControllerDelegate, UINavigationControl
                 guard let uid = user?.user.uid else {
                     return
                 }
-                
+                //UPLOAD IMAGES
                 let image = NSUUID().uuidString
                 let storageRef = Storage.storage().reference().child("Profile_Images").child("\(image).jpg")
                 
@@ -60,7 +60,7 @@ extension LoginController : UIImagePickerControllerDelegate, UINavigationControl
     }
     
     func registerUserIntoDBWithUid(uid: String, values: [String: AnyObject]) {
-
+        //UPLOAD DATA
         let ref = Database.database().reference().child("Users").child(uid)
 //        let values = ["Name": name, "Email": email]
         ref.updateChildValues(values, withCompletionBlock: {

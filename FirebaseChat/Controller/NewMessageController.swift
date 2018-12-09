@@ -26,13 +26,14 @@ class NewMessageController: UITableViewController {
     }
     
     func fetchUser() {
-        
+        //DOWNLOAD
         Database.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
             if let dictionary = snapshot.value as? NSDictionary {
         
                 let user = User()
                 user.name = dictionary["Name"] as? String
                 user.email = dictionary["Email"] as? String
+                user.profileImageUrl = dictionary["ProfileImageUrl"] as? String
                 
                 self.userArray.append(user)
                 
@@ -53,6 +54,28 @@ class NewMessageController: UITableViewController {
         
         cell.textLabel?.text = user.name
         cell.detailTextLabel?.text = user.email
+        cell.imageView?.image = UIImage(named: "profile icon")
+        
+        if let profileImageUrl = user.profileImageUrl {
+            
+            if let downloadUrl = URL(string: profileImageUrl) {
+            
+                URLSession.shared.dataTask(with: downloadUrl) {
+                    (data, response, error) in
+                    if error != nil {
+                        print(error!)
+                    }
+                    else {
+                        
+                        DispatchQueue.main.async(execute: {
+                            cell.imageView?.image = UIImage(data: data!)
+                        })
+                        
+                    }
+                }.resume()
+            }
+            
+        }
         
         return cell
     }
