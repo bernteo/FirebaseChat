@@ -61,6 +61,10 @@ class NewMessageController: UITableViewController {
         return userArray.count
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 72
+    }
+    
     @objc func handleCancel() {
         dismiss(animated: true, completion: nil)
     }

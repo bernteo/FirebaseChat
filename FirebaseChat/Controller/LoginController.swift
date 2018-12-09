@@ -22,7 +22,7 @@ class LoginController : UIViewController {
     }()
     
     //registerButton : UIButton!
-    let loginRegisterButton : UIButton = {
+    lazy var loginRegisterButton : UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
         button.setTitle("Register", for: .normal)
@@ -136,15 +136,19 @@ class LoginController : UIViewController {
     }()
     
     //profileImage : UIImageView!
-    let profileImage : UIImageView = {
+    lazy var profileImage : UIImageView = {
         let pi = UIImageView()
         pi.image = UIImage(named: "profile icon")
         pi.translatesAutoresizingMaskIntoConstraints = false
+        pi.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleProfileImageView)))
+        pi.isUserInteractionEnabled = true
         return pi
     }()
     
+    
+    
     //segmentedControl : UISegmentedControl!
-    let loginRegisterSegmentedControl : UISegmentedControl = {
+    lazy var loginRegisterSegmentedControl : UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Login", "Register"])
         sc.tintColor = UIColor.white
         sc.selectedSegmentIndex = 1
