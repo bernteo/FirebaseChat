@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LoginController: UIViewController {
+class LoginController : UIViewController {
 
     //inputsCV : UIView!
     let inputsCV : UIView = {
@@ -52,7 +52,7 @@ class LoginController: UIViewController {
          
                 let ref = Database.database().reference().child("Users")
                 let values = ["Name": name, "Email": email]
-                ref.childByAutoId().setValue(values) {
+                ref.updateChildValues(values, withCompletionBlock: {
                     (err, ref) in
                     if err != nil {
                         print(err!)
@@ -60,7 +60,7 @@ class LoginController: UIViewController {
                     else {
                         print("Saved User in DB")
                     }
-                }
+                })
             }
         }
     }
@@ -125,6 +125,21 @@ class LoginController: UIViewController {
     @objc func handleLoginRegisterChange() {
         let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
         loginRegisterButton.setTitle(title, for: .normal)
+        
+        inputsCVHeightA?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
+        
+        nameTextFieldHeightA?.isActive = false
+        nameTextFieldHeightA = nameTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
+        nameTextFieldHeightA?.isActive = true
+        
+        emailTextFieldHeightA?.isActive = false
+        emailTextFieldHeightA = emailTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        emailTextFieldHeightA?.isActive = true
+        
+        passwordTextFieldHeightA?.isActive = false
+        passwordTextFieldHeightA = passwordTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        passwordTextFieldHeightA?.isActive = true
+        
     }
     
     override func viewDidLoad() {
@@ -157,11 +172,19 @@ class LoginController: UIViewController {
         loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
     
+    var inputsCVHeightA : NSLayoutConstraint?
+    var nameTextFieldHeightA : NSLayoutConstraint?
+    var emailTextFieldHeightA : NSLayoutConstraint?
+    var passwordTextFieldHeightA : NSLayoutConstraint?
+
+    
     func setupInputsCV() {
         inputsCV.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         inputsCV.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         inputsCV.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        inputsCV.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        inputsCVHeightA = inputsCV.heightAnchor.constraint(equalToConstant: 150)
+        inputsCVHeightA?.isActive = true
         
         view.addSubview(nameTextField)
         view.addSubview(nameSeparator)
@@ -172,7 +195,9 @@ class LoginController: UIViewController {
         nameTextField.leftAnchor.constraint(equalTo: inputsCV.leftAnchor, constant: 12).isActive = true
         nameTextField.topAnchor.constraint(equalTo: inputsCV.topAnchor).isActive = true
         nameTextField.widthAnchor.constraint(equalTo: inputsCV.widthAnchor).isActive = true
-        nameTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: 1/3).isActive = true
+        
+        nameTextFieldHeightA = nameTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: 1/3)
+        nameTextFieldHeightA?.isActive = true
         
         nameSeparator.leftAnchor.constraint(equalTo: inputsCV.leftAnchor).isActive = true
         nameSeparator.topAnchor.constraint(equalTo: nameTextField.bottomAnchor).isActive = true
@@ -182,7 +207,9 @@ class LoginController: UIViewController {
         emailTextField.leftAnchor.constraint(equalTo: inputsCV.leftAnchor, constant: 12).isActive = true
         emailTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor).isActive = true
         emailTextField.widthAnchor.constraint(equalTo: inputsCV.widthAnchor).isActive = true
-        emailTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: 1/3).isActive = true
+        
+        emailTextFieldHeightA = emailTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: 1/3)
+        emailTextFieldHeightA?.isActive = true
         
         emailSeparator.leftAnchor.constraint(equalTo: inputsCV.leftAnchor).isActive = true
         emailSeparator.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
@@ -192,7 +219,9 @@ class LoginController: UIViewController {
         passwordTextField.leftAnchor.constraint(equalTo: inputsCV.leftAnchor, constant: 12).isActive = true
         passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
         passwordTextField.widthAnchor.constraint(equalTo: inputsCV.widthAnchor).isActive = true
-        passwordTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: 1/3).isActive = true
+        
+        passwordTextFieldHeightA = passwordTextField.heightAnchor.constraint(equalTo: inputsCV.heightAnchor, multiplier: 1/3)
+        passwordTextFieldHeightA?.isActive = true
         
     }
     
@@ -210,7 +239,7 @@ class LoginController: UIViewController {
 }
 
 extension UIColor {
-    convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
-        self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
-    }
+        convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
+            self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
+        }
 }
