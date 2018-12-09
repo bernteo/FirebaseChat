@@ -32,8 +32,10 @@ extension LoginController : UIImagePickerControllerDelegate, UINavigationControl
                 //UPLOAD IMAGES
                 let image = NSUUID().uuidString
                 let storageRef = Storage.storage().reference().child("Profile_Images").child("\(image).jpg")
+
+                if let profileImageView = self.profileImage.image, let upload = profileImageView.jpegData(compressionQuality: 0.1) {
+//                if let upload = self.profileImage.image!.jpegData(compressionQuality: 0.1) {
                 
-                if let upload = self.profileImage.image?.jpegData(compressionQuality: 0.1) {
                     storageRef.putData(upload, metadata: nil, completion: { (metadata, error) in
                         if error != nil {
                             print(error!)
