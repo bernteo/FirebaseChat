@@ -85,16 +85,13 @@ extension LoginController : UIImagePickerControllerDelegate, UINavigationControl
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        //** Local variable inserted by Swift 4.2 migrator.
-        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-        
         var selectedImageFromPicker : UIImage?
         
-        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
+        if let editedImage = info[.editedImage] as? UIImage {
             selectedImageFromPicker = editedImage
         }
             
-        else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+        else if let originalImage = info[.originalImage] as? UIImage {
             selectedImageFromPicker = originalImage
         }
         
@@ -112,8 +109,3 @@ extension LoginController : UIImagePickerControllerDelegate, UINavigationControl
     
 }
 
-
-//** Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-    return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}

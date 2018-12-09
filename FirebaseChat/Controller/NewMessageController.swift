@@ -59,7 +59,7 @@ class NewMessageController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 56
+        return 72
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,23 +77,9 @@ class NewMessageController: UITableViewController {
 //        cell.imageView?.contentMode = .scaleAspectFill
         
         if let profileImageUrl = user.profileImageUrl {
-            //** URL instead of NSURL
-            let url = URL(string: profileImageUrl)
-            //** URL shared datTask instead of NSURLSession sharedSession dataTaskWithURL
-            URLSession.shared.dataTask(with: url!, completionHandler: {
-                (data, response, error) in
+           
+            cell.profileImageView.loadImageUsingCache(urlString: profileImageUrl)
             
-                if error != nil {
-                    print(error!)
-                }
-                else {
-                    
-                    DispatchQueue.main.async(execute: {
-//                        cell.imageView?.image = UIImage(data: data!)
-                        cell.profileImageView.image = UIImage(data: data!)
-                    })
-                }
-            }).resume()
         }
         return cell
     }
@@ -104,16 +90,17 @@ class UserCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        textLabel?.frame = CGRect(x: 56, y: textLabel!.frame.origin.y, width: textLabel!.frame.width, height: textLabel!.frame.height)
-        detailTextLabel?.frame = CGRect(x: 56, y: detailTextLabel!.frame.origin.y, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
+        textLabel?.frame = CGRect(x: 64, y: textLabel!.frame.origin.y, width: textLabel!.frame.width, height: textLabel!.frame.height)
+        detailTextLabel?.frame = CGRect(x: 64, y: detailTextLabel!.frame.origin.y, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
 
     }
     
     let profileImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "nedstark")
-        imageView.layer.cornerRadius = 20
+        imageView.layer.cornerRadius = 24
         imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -125,13 +112,14 @@ class UserCell: UITableViewCell {
         
         profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
         profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        profileImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        profileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 48).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
 }
 
