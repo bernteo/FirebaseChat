@@ -34,17 +34,23 @@ class MessageController: UITableViewController {
         }
             
         else {
-            
-            let uid = Auth.auth().currentUser?.uid
-            Database.database().reference().child("Users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-                if let dictionary = snapshot.value as? NSDictionary {
-                
-                    self.navigationItem.title = dictionary["Name"] as? String
-                }
-            }, withCancel: nil)
+            setupNavTitle()
+           
         }
     }
 
+    func setupNavTitle() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        Database.database().reference().child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? NSDictionary {
+                
+                self.navigationItem.title = dictionary["Name"] as? String
+            }
+        }, withCancel: nil)
+    }
+    
     @objc func handleLogout() {
         
         do {
@@ -55,6 +61,7 @@ class MessageController: UITableViewController {
         }
         
         let loginController = LoginController()
+        loginController.messageController = self
         present(loginController, animated: true, completion: nil)
     }
 

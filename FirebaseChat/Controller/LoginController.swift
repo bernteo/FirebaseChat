@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 
 class LoginController : UIViewController {
+    
+    var messageController : MessageController?
 
     //inputsCV : UIView!
     let inputsCV : UIView = {
@@ -56,6 +58,7 @@ class LoginController : UIViewController {
                 print(error!)
             }
             else {
+                self.messageController?.setupNavTitle()
                 self.dismiss(animated: true, completion: nil)
             }
         }

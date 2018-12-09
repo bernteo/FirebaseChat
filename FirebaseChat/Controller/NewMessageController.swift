@@ -57,22 +57,7 @@ class NewMessageController: UITableViewController {
         
         if let profileImageUrl = user.profileImageUrl {
             
-            if let downloadUrl = URL(string: profileImageUrl) {
-            
-                URLSession.shared.dataTask(with: downloadUrl) {
-                    (data, response, error) in
-                    if error != nil {
-                        print(error!)
-                    }
-                    else {
-                        
-                        DispatchQueue.main.async(execute: {
-                            cell.profileImageView.image = UIImage(data: data!)
-                        })
-                        
-                    }
-                }.resume()
-            }
+            cell.profileImageView.loadImageCache(urlString: profileImageUrl)
             
         }
         

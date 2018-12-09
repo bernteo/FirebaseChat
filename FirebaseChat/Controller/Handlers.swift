@@ -69,6 +69,8 @@ extension LoginController : UIImagePickerControllerDelegate, UINavigationControl
                 print(err!)
             }
             else {
+//                self.messageController?.setupNavTitle()
+                self.navigationItem.title = values["Name"] as? String
                 self.dismiss(animated: true, completion: nil)
             }
         })
