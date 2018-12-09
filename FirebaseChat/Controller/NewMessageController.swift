@@ -48,13 +48,12 @@ class NewMessageController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! UserCell
         
         let user = userArray[indexPath.row]
         
         cell.textLabel?.text = user.name
         cell.detailTextLabel?.text = user.email
-        cell.imageView?.image = UIImage(named: "profile icon")
         
         if let profileImageUrl = user.profileImageUrl {
             
@@ -68,7 +67,7 @@ class NewMessageController: UITableViewController {
                     else {
                         
                         DispatchQueue.main.async(execute: {
-                            cell.imageView?.image = UIImage(data: data!)
+                            cell.profileImageView.image = UIImage(data: data!)
                         })
                         
                     }
@@ -95,8 +94,34 @@ class NewMessageController: UITableViewController {
 }
 
 class UserCell : UITableViewCell {
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        textLabel?.frame = CGRect(x: 64, y: textLabel!.frame.origin.y, width: textLabel!.frame.width, height: textLabel!.frame.height)
+        
+        detailTextLabel?.frame = CGRect(x: 64, y: detailTextLabel!.frame.origin.y, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
+    }
+    
+    let profileImageView : UIImageView = {
+        let pi = UIImageView()
+        pi.layer.cornerRadius = 24
+        pi.layer.masksToBounds = true
+        pi.contentMode = .scaleAspectFill
+        pi.translatesAutoresizingMaskIntoConstraints = false
+        return pi
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        
+        addSubview(profileImageView)
+        
+        profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+        profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
