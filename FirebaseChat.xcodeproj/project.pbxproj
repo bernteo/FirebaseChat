@@ -10,6 +10,8 @@
 		8C5103FC5604ED4D358DD125 /* Pods_FirebaseChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 205F67644FDE16351E391AEF /* Pods_FirebaseChat.framework */; };
 		A13927B321A8EE4F00970751 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13927B221A8EE4F00970751 /* LoginController.swift */; };
 		A13927B521A907B000970751 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A13927B421A907B000970751 /* GoogleService-Info.plist */; };
+		A14972D721BCCF1900742DF4 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14972D621BCCF1900742DF4 /* NewMessageController.swift */; };
+		A14972DA21BCD32A00742DF4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14972D921BCD32A00742DF4 /* User.swift */; };
 		A1DB5DFF21A83B4F000B4319 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DB5DFE21A83B4F000B4319 /* AppDelegate.swift */; };
 		A1DB5E0121A83B4F000B4319 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DB5E0021A83B4F000B4319 /* MessageController.swift */; };
 		A1DB5E0621A83B50000B4319 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1DB5E0521A83B50000B4319 /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 		900D6DED3F9DE5CCB0BB4E4B /* Pods-FirebaseChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseChat/Pods-FirebaseChat.release.xcconfig"; sourceTree = "<group>"; };
 		A13927B221A8EE4F00970751 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		A13927B421A907B000970751 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A14972D621BCCF1900742DF4 /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		A14972D921BCD32A00742DF4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1DB5DFB21A83B4F000B4319 /* FirebaseChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1DB5DFE21A83B4F000B4319 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1DB5E0021A83B4F000B4319 /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
@@ -64,8 +68,17 @@
 			children = (
 				A1DB5E0021A83B4F000B4319 /* MessageController.swift */,
 				A13927B221A8EE4F00970751 /* LoginController.swift */,
+				A14972D621BCCF1900742DF4 /* NewMessageController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		A14972D821BCD31000742DF4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A14972D921BCD32A00742DF4 /* User.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A1DB5DF221A83B4F000B4319 = {
@@ -89,6 +102,7 @@
 		A1DB5DFD21A83B4F000B4319 /* FirebaseChat */ = {
 			isa = PBXGroup;
 			children = (
+				A14972D821BCD31000742DF4 /* Model */,
 				A13927B121A8EE1100970751 /* Controller */,
 				A1DB5DFE21A83B4F000B4319 /* AppDelegate.swift */,
 				A1DB5E0521A83B50000B4319 /* Assets.xcassets */,
@@ -223,8 +237,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A14972D721BCCF1900742DF4 /* NewMessageController.swift in Sources */,
 				A1DB5E0121A83B4F000B4319 /* MessageController.swift in Sources */,
 				A13927B321A8EE4F00970751 /* LoginController.swift in Sources */,
+				A14972DA21BCD32A00742DF4 /* User.swift in Sources */,
 				A1DB5DFF21A83B4F000B4319 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
