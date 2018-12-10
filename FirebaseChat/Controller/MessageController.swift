@@ -45,10 +45,19 @@ class MessageController: UITableViewController {
         }
         Database.database().reference().child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionary = snapshot.value as? NSDictionary {
+//                self.navigationItem.title = dictionary["Name"] as? String
+            
+                let user = User()
+                user.name = dictionary["Name"] as? String
+                user.email = dictionary["Email"] as? String
                 
-                self.navigationItem.title = dictionary["Name"] as? String
+                self.setupProfileImageWithNavTitle(user: user)
             }
         }, withCancel: nil)
+    }
+    
+    func setupProfileImageWithNavTitle(user: User) {
+        self.navigationItem.title = user.name
     }
     
     @objc func handleLogout() {
